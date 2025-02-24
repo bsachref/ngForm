@@ -1,0 +1,43 @@
+{
+    "printWidth": 100, 
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "quoteProps": "as-needed",
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "htmlWhitespaceSensitivity": "css",
+    "singleAttributePerLine": false,
+    "bracketSameLine": false,
+    "endOfLine": "lf",
+    "proseWrap": "preserve",
+    "plugins": ["@trivago/prettier-plugin-sort-imports"],
+    "importOrder": [
+      "^@angular/(.*)$",
+      "^@core/(.*)$",
+      "^@utils/(.*)$",
+      "^@shared/(.*)$",
+      "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
+    "importOrderParserPlugins": ["typescript", "decorators-legacy"],
+    "overrides": [
+      {
+        "files": "*.component.html",
+        "options": {
+          "parser": "angular"
+        }
+      },
+      {
+        "files": "*.scss",
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
+  }
+  
+  

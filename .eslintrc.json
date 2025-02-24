@@ -1,0 +1,146 @@
+{
+    "root": true,
+    "ignorePatterns": ["projects/**/*"],
+    "overrides": [ 
+      {
+        "files": ["*.ts"],
+        "extends": [
+          "eslint:recommended",
+          "plugin:@typescript-eslint/recommended",
+          "plugin:@typescript-eslint/recommended-requiring-type-checking",
+          "plugin:@angular-eslint/recommended",
+          "plugin:@angular-eslint/template/process-inline-templates",
+          "plugin:prettier/recommended"
+        ],
+        "parserOptions": {
+          "project": ["tsconfig.json", "tsconfig.app.json", "tsconfig.spec.json"],
+          "createDefaultProgram": true,
+          "ecmaVersion": "latest"
+        },
+        "plugins": ["prettier", "import", "@typescript-eslint"],
+        "rules": {
+          "@angular-eslint/prefer-output-readonly": "error",
+          "@angular-eslint/no-host-metadata-property": "error",
+          "@angular-eslint/no-lifecycle-call": "error",
+          "@angular-eslint/directive-selector": [
+            "error",
+            {
+              "type": "attribute",
+              "prefix": "app",
+              "style": "camelCase"
+            }
+          ],
+          "@angular-eslint/component-selector": [
+            "error",
+            {
+              "type": "element",
+              "prefix": "app",
+              "style": "kebab-case"
+            }
+          ],
+          "@typescript-eslint/strict-boolean-expressions": "error",
+          "@typescript-eslint/explicit-member-accessibility": [
+            "error",
+            {
+              "accessibility": "explicit",
+              "overrides": {
+                "constructors": "no-public",
+                "accessors": "explicit",
+                "methods": "explicit",
+                "properties": "explicit",
+                "parameterProperties": "explicit"
+              }
+            }
+          ],
+          "@typescript-eslint/member-ordering": [
+            "error",
+            {
+              "default": [
+                "public-static-field",
+                "protected-static-field",
+                "private-static-field",
+                "public-instance-field",
+                "protected-instance-field",
+                "private-instance-field",
+                "constructor",
+                "public-instance-method",
+                "protected-instance-method",
+                "private-instance-method"
+              ]
+            }
+          ],
+          "@typescript-eslint/unbound-method": [
+            "error",
+            {
+              "ignoreStatic": true
+            }
+          ],
+          "import/order": [
+            "error",
+            {
+              "groups": [
+                ["builtin", "external"],
+                "internal",
+                ["parent", "sibling", "index"]
+              ],
+              "pathGroups": [
+                {
+                  "pattern": "@angular/**",
+                  "group": "external",
+                  "position": "before"
+                },
+                {
+                  "pattern": "@core/**",
+                  "group": "internal",
+                  "position": "before"
+                },
+                {
+                  "pattern": "@utils/**",
+                  "group": "internal",
+                  "position": "after"
+                },
+                {
+                  "pattern": "@ui-shared/**",
+                  "group": "internal",
+                  "position": "after"
+                }
+              ],
+              "pathGroupsExcludedImportTypes": ["@angular/**"],
+              "newlines-between": "always",
+              "alphabetize": {
+                "order": "asc",
+                "caseInsensitive": true
+              }
+            }
+          ],
+          "import/no-duplicates": "error",
+          "no-console": ["warn", { "allow": ["warn", "error"] }],
+          "no-debugger": "error",
+          "no-unused-vars": "off",
+          "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+          "no-multiple-empty-lines": ["error", { "max": 1 }],
+          "prefer-const": "error",
+          "no-var": "error",
+          "prettier/prettier": ["error"]
+        }
+      },
+      {
+        "files": ["*.html"],
+        "extends": [
+          "plugin:@angular-eslint/template/recommended",
+          "plugin:@angular-eslint/template/accessibility"
+        ],
+        "rules": {
+          "@angular-eslint/template/prefer-self-closing-tags": "error",
+          "@angular-eslint/template/prefer-ngsrc": "error",
+          "@angular-eslint/template/prefer-control-flow": "error",
+          "@angular-eslint/template/no-negated-async": "error",
+          "@angular-eslint/template/accessibility-valid-aria": "error",
+          "@angular-eslint/template/click-events-have-key-events": "error",
+          "@angular-eslint/template/no-autofocus": "error",
+          "@angular-eslint/template/no-positive-tabindex": "error"
+        }
+      }
+    ]
+  }
+  

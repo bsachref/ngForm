@@ -1,0 +1,213 @@
+<form [formGroup]="form" [attr.name]="formName()" (ngSubmit)="onSubmit()">
+  @for (control of controls(); track $index) {
+    @if (control.uiFramework === "primeng" || !control.uiFramework) {
+      @if (form.get(control.name)) {
+        <section [ngClass]="control.class" [ngStyle]="control.style">
+          @if (control.label) {
+            <label
+              [attr.for]="control.name"
+              [ngClass]="control.labelClass"
+              [ngStyle]="control.labelStyle"
+            >
+              {{ control.label }}
+            </label>
+          }
+
+          @switch (control.type) {
+            @case ("text") {
+              <input
+                pInputText
+                [formControlName]="control.name"
+                [id]="control.name"
+                (change)="control.events?.onChange?.($event)"
+                (focus)="control.events?.onFocus?.($event)"
+                (blur)="control.events?.onBlur?.($event)"
+                (keyup)="control.events?.onKeyUp?.($event)"
+                (keydown)="control.events?.onKeyDown?.($event)"
+                (paste)="control.events?.onPaste?.($event)"
+              />
+            }
+            @case ("number") {
+              <input
+                pInputText
+                type="number"
+                [formControlName]="control.name"
+                [id]="control.name"
+                (change)="control.events?.onChange?.($event)"
+                (focus)="control.events?.onFocus?.($event)"
+                (blur)="control.events?.onBlur?.($event)"
+                (keyup)="control.events?.onKeyUp?.($event)"
+                (keydown)="control.events?.onKeyDown?.($event)"
+                (paste)="control.events?.onPaste?.($event)"
+              />
+            }
+            @case ("password") {
+              <input
+                pInputText
+                type="password"
+                [formControlName]="control.name"
+                [id]="control.name"
+                (change)="control.events?.onChange?.($event)"
+                (focus)="control.events?.onFocus?.($event)"
+                (blur)="control.events?.onBlur?.($event)"
+                (keyup)="control.events?.onKeyUp?.($event)"
+                (keydown)="control.events?.onKeyDown?.($event)"
+                (paste)="control.events?.onPaste?.($event)"
+              />
+            }
+            @case ("email") {
+              <input
+                pInputText
+                type="email"
+                [formControlName]="control.name"
+                [id]="control.name"
+                (change)="control.events?.onChange?.($event)"
+                (focus)="control.events?.onFocus?.($event)"
+                (blur)="control.events?.onBlur?.($event)"
+                (keyup)="control.events?.onKeyUp?.($event)"
+                (keydown)="control.events?.onKeyDown?.($event)"
+                (paste)="control.events?.onPaste?.($event)"
+              />
+            }
+            @case ("select") {
+              <p-select
+                [options]="control.options"
+                [formControlName]="control.name"
+                (onChange)="control.events?.onChange?.($event)"
+                (onFocus)="control.events?.onFocus?.($event)"
+                (onBlur)="control.events?.onBlur?.($event)"
+              />
+            }
+            @case ("multi-select") {
+              <p-multiSelect
+                [options]="control.options"
+                [formControlName]="control.name"
+                (onChange)="control.events?.onChange?.($event)"
+                (onFocus)="control.events?.onFocus?.($event)"
+                (onBlur)="control.events?.onBlur?.($event)"
+              ></p-multiSelect>
+            }
+            @case ("textarea") {
+              <textarea
+                pTextarea
+                [formControlName]="control.name"
+                [id]="control.name"
+                (change)="control.events?.onChange?.($event)"
+                (focus)="control.events?.onFocus?.($event)"
+                (blur)="control.events?.onBlur?.($event)"
+                (keyup)="control.events?.onKeyUp?.($event)"
+                (keydown)="control.events?.onKeyDown?.($event)"
+                (paste)="control.events?.onPaste?.($event)"
+              ></textarea>
+            }
+            @case ("checkbox") {
+              <p-checkbox
+                [binary]="true"
+                [formControlName]="control.name"
+                (onChange)="control.events?.onChange?.($event)"
+                (onFocus)="control.events?.onFocus?.($event)"
+                (onBlur)="control.events?.onBlur?.($event)"
+              ></p-checkbox>
+            }
+            @case ("radio") {
+              @for (option of control.options ?? []; track $index) {
+                <div>
+                  <p-radioButton
+                    [name]="control.name"
+                    [formControlName]="control.name"
+                    [value]="option"
+                    [inputId]="'radio-' + option"
+                    (onChange)="control.events?.onChange?.($event)"
+                    (onFocus)="control.events?.onFocus?.($event)"
+                    (onBlur)="control.events?.onBlur?.($event)"
+                  ></p-radioButton>
+                  <label [for]="'radio-' + option">{{ option }}</label>
+                </div>
+              }
+            }
+            @case ("date") {
+              <p-datepicker
+                [formControlName]="control.name"
+                (onSelect)="control.events?.onSelect?.($event)"
+                (onFocus)="control.events?.onFocus?.($event)"
+                (onBlur)="control.events?.onBlur?.($event)"
+              />
+            }
+            @case ("toggle") {
+              <p-toggleButton
+                [formControlName]="control.name"
+                (onChange)="control.events?.onChange?.($event)"
+                (onFocus)="control.events?.onFocus?.($event)"
+                (onBlur)="control.events?.onBlur?.($event)"
+              ></p-toggleButton>
+            }
+            <!-- @case ("file") {
+              <p-fileUpload 
+              [customUpload]="true"
+              [formControlName]="control.name"
+              (onSelect)="control.events?.onSelect?.($event)"
+              (onClear)="control.events?.onClear?.($event)"
+              (onRemove)="control.events?.onRemove?.($event)"
+              (onError)="control.events?.onError?.($event)"
+              (onBeforeUpload)="control.events?.onBeforeUpload?.($event)"
+              (onProgress)="control.events?.onProgress?.($event)"
+              (onUpload)="control.events?.onUpload?.($event)"
+              >
+
+              <p-fileUpload
+                [customUpload]="true"
+                (onUpload)="onFileSelect($event, control.name)"
+                [formControlName]="control.name"
+                [id]="control.name"
+                [chooseLabel]="control.primeng?.chooseLabel"
+                [uploadLabel]="control.primeng?.uploadLabel"
+                [cancelLabel]="control.primeng?.cancelLabel"
+                [auto]="control.primeng?.auto"
+                [url]="control.primeng?.url"
+                [withCredentials]="control.primeng?.withCredentials"
+                [multiple]="control.primeng?.multiple"
+                [maxFileSize]="control.primeng?.maxFileSize"
+                [customUpload]="control.primeng?.customUpload"
+                [showUploadButton]="control.primeng?.showUploadButton"
+                [showCancelButton]="control.primeng?.showCancelButton"
+                [accept]="control.primeng?.accept"
+                [mode]="control.primeng?.mode"
+                [previewWidth]="control.primeng?.previewWidth"
+                (onSelect)="control.events?.onSelect?.($event)"
+                (onClear)="control.events?.onClear?.($event)"
+                (onRemove)="control.events?.onRemove?.($event)"
+                (onError)="control.events?.onError?.($event)"
+                (onBeforeUpload)="control.events?.onBeforeUpload?.($event)"
+                (onProgress)="control.events?.onProgress?.($event)"
+                (onUpload)="control.events?.onUpload?.($event)"
+              >
+                <ng-template pTemplate="content">
+                  <p-button label="Choose File" icon="pi pi-upload"></p-button>
+                </ng-template>
+              </p-fileUpload>
+            } -->
+            @case ("slider") {
+              <p-slider
+                [formControlName]="control.name"
+                (onChange)="control.events?.onChange?.($event)"
+                (onSlideEnd)="control.events?.onSlideEnd?.($event)"
+              ></p-slider>
+            }
+          }
+
+          <validation-messages
+            [control]="form.get(control.name)"
+            [controlName]="control.name"
+            [config]="control"
+          ></validation-messages>
+        </section>
+      }
+    }
+  }
+  <button
+    pButton
+    type="submit"
+    [disabled]="form.invalid"
+    label="Submit"
+  ></button>
+</form>

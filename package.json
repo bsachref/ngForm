@@ -1,0 +1,93 @@
+{
+  "name": "@bsachref/ng-form",
+  "description": "A dynamic form component for Angular using PrimeNG or Angular Material",
+  "keywords": [
+    "angular",
+    "angular-components",
+    "angular-library",
+    "angular-material",
+    "angular-prime",
+    "angular-ui",
+    "angular-forms",
+    "angular-dynamic-forms",
+    "angular-form-builder",
+    "angular-form-generator",
+    "angular-form-validation",
+    "angular-form-validation-messages",
+    "angular-form-validation-errors"
+  ],
+  "author": "BOUSNINA Achraf",
+  "version": "1.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bsachref/ngForm.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
+    "pretty": "prettier --write src",
+    "format": "npm run pretty && npm run lint:fix",
+    "build:lib": "ng-packagr -p ng-package.json"
+  },
+  "private": false,
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^18.2.12",
+    "@angular/cli": "^18.2.12",
+    "@angular/compiler-cli": "^18.2.0",
+    "@types/express": "^4.17.17",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^18.18.0",
+    "jasmine-core": "~5.2.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^18.2.1",
+    "typescript": "~5.5.2",
+    "angular-eslint": "^19.1.0",
+    "typescript-eslint": "^8.24.1"
+  },
+  "peerDependencies": {
+    "@angular/core": "^18.0.0",
+    "@angular/cdk": "^18.2.14",
+    "@angular/compiler": "^18.2.0",
+    "@angular/forms": "^18.0.0",
+    "@angular/material": "^18.2.14",
+    "@angular/animations": "^18.2.0",
+    "@angular/common": "^18.2.0",
+    "@angular/platform-browser": "^18.2.0",
+    "@angular/platform-browser-dynamic": "^18.2.0",
+    "@angular/platform-server": "^18.2.0",
+    "@angular/router": "^18.2.0",
+    "@angular/ssr": "^18.2.12",
+    "@bsachref/ng-form": "^1.0.1",
+    "@primeng/themes": "^19.0.6",
+    "express": "^4.18.2",
+    "primeicons": "^7.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.10",
+    "primeng": "^18.0.0"
+  },
+  "files": [
+    "app",
+    "esm2022",
+    "fesm2022",
+    "index.d.ts",
+    "public-api.d.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://buymeacoffee.com/bsachref"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

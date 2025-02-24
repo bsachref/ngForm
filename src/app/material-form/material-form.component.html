@@ -1,0 +1,77 @@
+<form [formGroup]="form" [attr.name]="formName()" (ngSubmit)="onSubmit()">
+  @for (control of controls(); track $index) {
+  @if (control.uiFramework === "material" || !control.uiFramework) {
+  @if (form.get(control.name)) {
+  <section [ngClass]="control.class" [ngStyle]="control.style">
+    @if (control.type === "input") {
+    <mat-form-field appearance="outline">
+      @if (control.label) {
+      <mat-label>{{ control.label }}</mat-label>
+      }
+      <input matInput [formControlName]="control.name" [id]="control.name" type="text" />
+    </mat-form-field>
+    }
+    @if (control.type === "select") {
+    <mat-form-field appearance="outline">
+      @if (control.label) {
+      <mat-label>{{ control.label }}</mat-label>
+      }
+      <mat-select [formControlName]="control.name" [id]="control.name">
+        @for (option of control.options ?? []; track $index) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    }
+    @if (control.type === "checkbox") {
+    <mat-checkbox [formControlName]="control.name" [id]="control.name">
+      {{ control.label }}
+    </mat-checkbox>
+    }
+    @if (control.type === "radio") {
+    <mat-radio-group [formControlName]="control.name">
+      @for (option of control.options ?? []; track $index) {
+      <mat-radio-button [id]="control.name + '-' + option" [value]="option">
+        {{ option }}
+      </mat-radio-button>
+      }
+    </mat-radio-group>
+    }
+    @if (control.type === "datepicker") {
+    @if (control.datePickerMode === "single") {
+    <mat-form-field appearance="outline">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="datepicker" [formControlName]="control.name" />
+      <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
+    </mat-form-field>
+    } @else if (control.datePickerMode === "range") {
+    <mat-form-field>
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker" [formGroup]="form" ]>
+        <input matStartDate formControlName="{{ control.name }}_Start" placeholder="Start date" />
+        <input matEndDate formControlName="{{ control.name }}_End" placeholder="End date" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      <!-- @if (form.controls.start.hasError('matStartDateInvalid')) {
+                              <mat-error>Invalid start date</mat-error>
+                            }
+                            @if (form.controls.end.hasError('matEndDateInvalid')) {
+                              <mat-error>Invalid end date</mat-error>
+                            } -->
+    </mat-form-field>
+    }
+    }
+
+    <validation-messages [control]="form.get(control.name)" [controlName]="control.name"
+      [config]="control"></validation-messages>
+  </section>
+  }
+  }
+  }
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    Submit
+  </button>
+</form>

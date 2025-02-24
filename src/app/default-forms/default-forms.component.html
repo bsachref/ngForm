@@ -1,0 +1,67 @@
+<form [formGroup]="form" [attr.name]="formName()" (ngSubmit)="onSubmit()">
+  @for (control of controls(); track $index) {
+    @if (control.uiFramework === "default" || !control.uiFramework) {
+      @if (form.get(control.name)) {
+        <section [ngClass]="control.class" [ngStyle]="control.style">
+          @if (control.label) {
+            <label
+              [attr.for]="control.name"
+              [ngClass]="control.labelClass"
+              [ngStyle]="control.labelStyle"
+            >
+              {{ control.label }}
+            </label>
+          }
+
+          @if (control.type === "input") {
+            <input
+              [formControlName]="control.name"
+              [id]="control.name"
+              type="text"
+            />
+          }
+          @if (control.type === "select") {
+            <select [formControlName]="control.name" [id]="control.name">
+              @for (option of control.options; track $index) {
+                <option [value]="option">{{ option }}</option>
+              }
+            </select>
+          }
+          @if (control.type === "textarea") {
+            <textarea
+              [formControlName]="control.name"
+              [id]="control.name"
+            ></textarea>
+          }
+          @if (control.type === "checkbox") {
+            <input
+              type="checkbox"
+              [formControlName]="control.name"
+              [id]="control.name"
+            />
+          }
+          @if (control.type === "radio") {
+            @for (option of control.options ?? []; track $index) {
+              <div>
+                <input
+                  type="radio"
+                  [formControlName]="control.name"
+                  [id]="control.name + '-' + option"
+                  [value]="option"
+                />
+                <label [for]="control.name + '-' + option">{{ option }}</label>
+              </div>
+            }
+          }
+
+          <validation-messages
+            [control]="form.get(control.name)"
+            [controlName]="control.name"
+            [config]="control"
+          ></validation-messages>
+        </section>
+      }
+    }
+  }
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

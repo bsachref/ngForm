@@ -1,0 +1,36 @@
+@if (control?.invalid && control?.touched) {
+  <section class="error-messages" style="color: red">
+    @if (control?.errors?.["required"]) {
+      <small>{{ controlName }} is required</small>
+    }
+    @if (control?.errors?.["minlength"]) {
+      <small
+        >Minimum length:
+        {{ getValidatorValue("minlength", "requiredLength") }}</small
+      >
+    }
+    @if (control?.errors?.["maxlength"]) {
+      <small
+        >Maximum length:
+        {{ getValidatorValue("maxlength", "requiredLength") }}</small
+      >
+    }
+    @if (control?.errors?.["pattern"]) {
+      <small>Invalid format</small>
+    }
+    @if (control?.errors?.["email"]) {
+      <small>Invalid email address</small>
+    }
+    @if (control?.errors?.["min"]) {
+      <small
+        >Value must be at least {{ getValidatorValue("min", "min") }}</small
+      >
+    }
+    @if (control?.errors?.["max"]) {
+      <small>Value must not exceed {{ getValidatorValue("max", "max") }}</small>
+    }
+    @if (control?.errors?.["custom"]) {
+      <small>{{ getCustomErrorMessage() }}</small>
+    }
+  </section>
+}
